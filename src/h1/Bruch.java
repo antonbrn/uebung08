@@ -11,6 +11,8 @@ public class Bruch {
 	}
 	
 	private int ggT(int x, int y) {
+		x = Math.abs(x);
+		y= Math.abs(y);
 		int tmpBig;
 		int tmpSmall;
 		if (x > y) {
@@ -20,8 +22,8 @@ public class Bruch {
 			tmpBig = y;
 			tmpSmall = x;
 		}
-		if (x == 0 || y == 0) {
-			return Math.abs(tmpBig) > Math.abs(tmpSmall) ? tmpBig : tmpSmall ;
+		if (tmpSmall == 0) {
+			return tmpBig;
 		}
 		
 		while (tmpSmall != 0) {
@@ -35,15 +37,27 @@ public class Bruch {
 	public void shorten() {
 		if (nenner != 0) {
 			int ggt = ggT(zaehler, nenner);
-			zaehler = Math.abs(zaehler) / ggt;
-			nenner = Math.abs(nenner) / ggt;
+			zaehler = zaehler / ggt;
+			nenner = nenner / ggt;
 		}
 	}
-	
+	 
 	public boolean hasSameValueAs(Bruch b) {
 		shorten();
 		b.shorten();
-		return (this.zaehler == b.zaehler && this.nenner == b.nenner);
+		if (nenner == 0 || b.nenner == 0) {
+			return false;
+		}
+		if (zaehler == 0 && b.zaehler == 0 && nenner != 0 && b.nenner != 0) {
+			return true;
+		}
+		
+		if (Math.abs(this.zaehler) == Math.abs(b.zaehler) && Math.abs(this.nenner) == Math.abs(b.nenner)) {
+			if (Math.signum(this.zaehler*this.nenner) ==  Math.signum(b.zaehler*b.nenner)) {
+				return true;
+			}
+		} 
+		return false;
 	}
 }
   
