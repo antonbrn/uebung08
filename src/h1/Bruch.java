@@ -21,7 +21,7 @@ public class Bruch {
 			tmpSmall = x;
 		}
 		if (x == 0 || y == 0) {
-			return tmpBig;
+			return Math.abs(tmpBig) > Math.abs(tmpSmall) ? tmpBig : tmpSmall ;
 		}
 		
 		while (tmpSmall != 0) {
@@ -35,8 +35,8 @@ public class Bruch {
 	public void shorten() {
 		if (nenner != 0) {
 			int ggt = ggT(zaehler, nenner);
-			zaehler = zaehler / ggt;
-			nenner = nenner / ggt;
+			zaehler = Math.abs(zaehler) / ggt;
+			nenner = Math.abs(nenner) / ggt;
 		}
 	}
 	
